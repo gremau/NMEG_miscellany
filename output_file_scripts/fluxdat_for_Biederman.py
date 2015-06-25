@@ -1,5 +1,4 @@
-# Script to create and export data files for the UWashington Ecoclimate project
-
+# Script to create and export data files for Joel Biederman's synthesis
 
 import sys
 sys.path.append( '/home/greg/current/NMEG_utils/py_modules/' )
@@ -19,23 +18,26 @@ startyear = 2007
 endyear = 2014
 
 # List AF site names in same order
-siteNames = [ 'US-Mpj', 'US-Mpg' ]
+siteNames = [ 'US-Vcm', 'US-Vcp', 'US-Wjs', 'US-Mpj', 'US-Ses' ]
 
 for i, site in enumerate( siteNames ):
-    # For now the data are different in 2007-8 and 2009-14, so we need to
-    # get them in separate dataframes
 
-    # Get the multi-year ameriflux dataframe
+    # Get the multi-year ameriflux dataframe 
     site_df = ld.get_multiyr_aflx( site, datapath, gapfilled=True, 
-                                   startyear=2007, endyear=endyear )
+                                   startyear=startyear, endyear=endyear )
+
+    # Create a daily dataframe these are pretty much the defaults
+    site_df_resamp = tr.resample_30min_aflx( site_df, 
+            freq='1D', c_fluxes=[ 'GPP', 'RECO', 'FC_F' ], 
+            le_flux=[ 'LE_F' ], avg_cols=[ 'TA_F', 'RH_F', 'SW_IN_F', 'RNET' ], 
+            precip_col='P_F' , tair_col='TA_F' )
+
+
     #ipdb.set_trace()
 
-    
-    site_df = site_df[['TA_F', 'RH_F', 'PA', 'WS', 'WD', 'SW_IN_F', 
-            'SW_OUT', 'LW_IN', 'LW_OUT']]
-
     # Export
-    site_df.to_csv( '../processed_data/' + site + '_met_UW_Ecoclimate.csv',
+    site_df_resamp.to_csv( '../processed_data/' + site 
+            + '_biederman_synth.csv',
             na_rep = '-9999')
 
 
