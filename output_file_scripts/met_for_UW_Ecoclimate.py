@@ -36,7 +36,7 @@ for i, site in enumerate( siteNames ):
 
     # Export
     site_df.to_csv( '../processed_data/' + site + '_met_UW_Ecoclimate.csv',
-            na_rep = '-9999')
+            na_rep = '-9999', date_format='%Y%m%d%H%M%S')
 
 
 # Function for plotting fixed and original data
