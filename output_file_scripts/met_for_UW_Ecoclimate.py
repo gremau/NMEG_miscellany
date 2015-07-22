@@ -32,7 +32,7 @@ for i, site in enumerate( siteNames ):
 
     
     site_df = site_df[['TA_F', 'RH_F', 'PA', 'WS', 'WD', 'SW_IN_F', 
-            'SW_OUT', 'LW_IN', 'LW_OUT']]
+            'SW_OUT', 'LW_IN', 'LW_OUT', 'P_F']]
 
     # Export
     site_df.to_csv( '../processed_data/' + site + '_met_UW_Ecoclimate.csv',
