@@ -44,8 +44,11 @@ daily = { x :
 
 # Now calculate degree days and time of peak fluxes
 for i, site in enumerate(sites):
-    # Add a column with 0.5 for each uptake period (to sum)
+    # Add columns with degree days (and remove <0 values from second)
     daily[site]['degree_days'] = (daily[site].TA_F_max - daily[site].TA_F_min)/2
+    daily[site]['degree_days2'] = (daily[site].TA_F_max + daily[site].TA_F_min)/2
+    test = daily[site].degree_days2 < 0
+    daily[site].degree_days2[test] = 0
 
     h = hourly[site]
     # Get the time of day for peak GPP each day
@@ -106,6 +109,8 @@ for site in sites:
     monthly[site]['TA_F_min_avg'] = daily[site].TA_F_min.resample(
             '1M', how='mean')
     monthly[site]['growing_deg_days_sum'] = daily[site].degree_days.resample(
+            '1M', how='sum')
+    monthly[site]['growing_deg_days_2_sum'] = daily[site].degree_days2.resample(
             '1M', how='sum')
     monthly[site]['peak_NEE_dayfrac_avg'] = daily[site].peakNEE_dayfrac.resample(
             '1M', how='mean')
