@@ -1,12 +1,14 @@
-import loaddata as ld
+import sys
+sys.path.append( '/home/greg/current/NMEG_utils/py_modules/' )
+import load_nmeg as ld
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import ipdb as ipdb
+import pdb as pdb
 
-remake_files = True
+remake_files = False
 
-datapath = ('../processed_data/')
+datapath = ('/home/greg/current/NMEG_utils/processed_data/')
 
 startYear = 2007
 endYear = 2013
@@ -43,7 +45,7 @@ def make_files() :
     GPP_int_daily.to_csv(datapath + 'GPP_int_daily.csv', na_rep='NaN')
     RE_int_daily.to_csv(datapath + 'RE_int_daily.csv', na_rep='NaN')
 
-    print 'new files made'
+    print('new files made')
 
 # Rebuild files in needed (make sure AF directory is available)
 if remake_files :

@@ -1,16 +1,19 @@
-import loaddata as ld
+import sys
+sys.path.append( '/home/greg/current/NMEG_utils/py_modules/' )
+
+import load_nmeg as ld
 import os
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import ipdb as ipdb
+import pdb as pdb
 import datetime as dt
 
 # Cold season = Nov - Feb
 # Spring = March - June
 # Summer = July - October
 
-PRISM_datapath = ('/home/greg/sftp/eddyflux/Ancillary_met_data/')
+PRISM_datapath = ('/home/greg/sftp/eddyflux/Ancillary_met_data/PRISM_daily/')
 
 PRISM_filelist = os.listdir(PRISM_datapath)
 

@@ -1,13 +1,15 @@
-import loaddata as ld
+import sys
+sys.path.append( '/home/greg/current/NMEG_utils/py_modules/' )
+
+import load_nmeg as ld
 import os
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import ipdb as ipdb
+import pdb as pdb
 import datetime as dt
 
-datapath = ('/home/greg/sftp/eddyflux/Ameriflux_files_GM/'
-            '2007-2013_Reichstein/')
+datapath = ('/home/greg/sftp/eddyflux/Ameriflux_files/provisional/')
 fileList = os.listdir(datapath)
 
 startYear = 2007
@@ -38,7 +40,7 @@ for i, site in enumerate(siteNames):
         fName = '{0}_{1}_with_gaps.txt'.format(site, j)
         
         if fName in siteFileList:
-            yearDf = ld.loadAFfile(datapath + fName, j)
+            yearDf = ld.load_aflx_file(datapath + fName, j)
             #siteDf = pd.merge(siteDf, yearDf,
             #        left_index=True, right_index=True,
             #how='left')
@@ -48,7 +50,7 @@ for i, site in enumerate(siteNames):
     idxyrs = siteDf.index.year > 2005;
     siteDf = siteDf.iloc[idxyrs, :]
     siteDf = siteDf.reindex(newidx)
-    PrecipDF[site] = siteDf.PRECIP
+    PrecipDF[site] = siteDf.P
 
 
 PrecipDaily = PrecipDF.resample('1D', how='sum')
