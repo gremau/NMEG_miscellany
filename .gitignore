@@ -12,6 +12,9 @@
 scratch.m
 test_batch.m
 doc*
+*/.ipynb_checkpoints/*
+processed_data/*
+figures/*
 
 # Compiled source #
 ###################
