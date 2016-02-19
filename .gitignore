@@ -15,6 +15,7 @@ doc*
 */.ipynb_checkpoints/*
 processed_data/*
 figures/*
+*.swp
 
 # Compiled source #
 ###################
