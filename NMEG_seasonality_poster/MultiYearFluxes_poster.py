@@ -1,6 +1,7 @@
 import sys
 sys.path.append( '/home/greg/current/NMEG_utils/py_modules/' )
 import load_nmeg as ld
+import transform_nmeg as tr
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -36,9 +37,9 @@ def make_files() :
     RE_int_daily = RE_int_df.resample('1D', how='sum')
 
     # Add water year and season columns
-    FC_int_daily = ld.add_WY_cols(FC_int_daily)
-    GPP_int_daily = ld.add_WY_cols(GPP_int_daily)
-    RE_int_daily = ld.add_WY_cols(RE_int_daily)
+    FC_int_daily = tr.add_WY_cols(FC_int_daily)
+    GPP_int_daily = tr.add_WY_cols(GPP_int_daily)
+    RE_int_daily = tr.add_WY_cols(RE_int_daily)
 
     # output to csv
     FC_int_daily.to_csv(datapath + 'FC_int_daily.csv', na_rep='NaN')

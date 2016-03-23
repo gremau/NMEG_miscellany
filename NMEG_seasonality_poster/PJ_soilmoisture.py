@@ -1,4 +1,5 @@
-import loaddata as ld
+import load_nmeg as ld
+import transform_nmeg as tr
 import os
 import numpy as np
 import pandas as pd
@@ -32,7 +33,7 @@ for i in range(startYear, endYear + 1):
 SM_df = data.reindex(SM_idx)
 
 # Add water year and season columns
-SM_df = ld.add_WY_cols(SM_df)
+SM_df = tr.add_WY_cols(SM_df)
 
 SM_df.to_csv('../processed_data/' + 'PJ_VWC_daily.csv', na_rep='NaN')
 

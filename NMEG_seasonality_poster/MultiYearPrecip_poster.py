@@ -2,6 +2,7 @@ import sys
 sys.path.append( '/home/greg/current/NMEG_utils/py_modules/' )
 
 import load_nmeg as ld
+import transform_nmeg as tr
 import os
 import numpy as np
 import pandas as pd
@@ -33,7 +34,7 @@ for i in range(startYear, endYear + 1):
 PRISM_df = data.reindex(PRISM_idx)
 
 # Add water year and season columns
-PRISM_df = ld.add_WY_cols(PRISM_df)
+PRISM_df = tr.add_WY_cols(PRISM_df)
 
 # Rename columns and export
 PRISM_df = PRISM_df.rename(columns={'MCon': 'US-Vcm', 'PPine': 'US-Vcp',
